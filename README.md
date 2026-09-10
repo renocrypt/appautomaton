@@ -64,16 +64,21 @@ adds search, filtering, motion, and a persistent theme preference.
 
 ## Publication state
 
-Preview: https://renocrypt.github.io/appautomaton/
+Live site: https://appautomaton.renocrypt.com/
 
-`site.config.json` starts in **preview** mode. The preview carries `noindex`
-and publishes an empty sitemap. It does not claim that the intended production
-hostname has been assigned. Production uses a self-canonical collection page
-and a sitemap of this site's own pages, not third-party destinations.
+GitHub Pages serves this custom hostname through Cloudflare. The default
+`renocrypt.github.io/appautomaton/` address redirects to it. `site.config.json`
+is in **production** mode: the collection and colophon allow indexing, use
+self-canonical URLs, and appear in the site's sitemap. Project destinations
+are normal followable links; the publication check rejects restrictive link
+attributes in the collection.
 
-The intended hostname is `appautomaton.renocrypt.com`. Its existing redirects
-and Google address change must be reconciled before switching it to this site.
-See [launch notes](docs/launch.md).
+The site continues to support an explicit preview mode for future staging.
+Preview HTML carries `noindex`, and its sitemap is empty. Publication never
+requires an npm project or dependency installation.
+
+Old project paths on this hostname retain their redirects to `appautomaton.com`.
+See [launch notes](docs/launch.md) for the remaining migration bookkeeping.
 
 ## Art direction and credits
 

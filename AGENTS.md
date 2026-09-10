@@ -14,6 +14,7 @@ owned by `appautomaton` that have a valid HTTP(S) About website URL.
 - Write precise, elegant copy without mid-sentence em dashes or semicolon habits.
 - Source branch is main. Weekly and manual builds refresh metadata before
   deployment. API failures must preserve the previous deployment.
-- Default publication is a noindex preview. Do not point the production hostname
-  here until its existing redirects and Google migration have been reconciled
-  with the operator. See docs/launch.md.
+- Publish the collection and colophon in production indexing mode. Keep normal
+  followable project links, self-canonical pages, and a sitemap of this site.
+  The hostname is appautomaton.renocrypt.com. Preserve its legacy project-path
+  redirects when changing routes. See docs/launch.md.

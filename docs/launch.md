@@ -1,29 +1,25 @@
-# Launch dependency
+# Publication and migration
 
-Current publication is a noindex preview on GitHub Pages. The intended custom
-hostname is `appautomaton.renocrypt.com`; it is not assigned by this repository.
+The field guide is live at `https://appautomaton.renocrypt.com/`, published
+from `renocrypt/appautomaton` through GitHub Actions Pages. Cloudflare's proxied
+CNAME points to `renocrypt.github.io`. GitHub enforces HTTPS with a valid origin
+certificate. The default GitHub project URL redirects to the custom hostname.
 
-On 2026-09-09 the old catalog moved to `appautomaton.com`. Cloudflare currently
-redirects the old hostname and all paths there. Google accepted a whole-host
-Change of Address on the same date. The new field guide is different content
-under RenoCrypt, so it needs an explicit launch decision before replacing that
-redirect. Keep legacy project redirects when assigning new site routes.
+The old organization catalog lives at `https://appautomaton.com/`. Cloudflare
+preserves the 16 legacy project paths and their descendants with 301 redirects,
+including query strings. The former whole-host redirect is disabled. New site
+routes must not collide with those preserved legacy paths.
 
-Before production:
+Production publication allows indexing of the homepage and colophon, with
+self-canonical metadata and a sitemap of those pages. Outgoing project links
+are rendered as ordinary HTML links without restrictive rel attributes.
 
-1. Confirm launch timing with the operator and reconcile the existing Search
-   Console migration. It currently tells Google to prefer the new catalog host.
-2. Inventory the old URL paths and retain their exact project destinations.
-   Update the original repositories’ GitHub About URLs to their new destinations
-   before repurposing the old homepage. The build rejects a project link back
-   to this directory’s root in production.
-3. Set the GitHub Pages custom domain on this repository, verify DNS ownership,
-   and obtain HTTPS before changing the public routing.
-4. Set `publication` to `production`, build, and verify the intended canonical,
-   public indexing directives, project backlinks, and sitemap.
-5. Switch the homepage routing, then verify the new page and retained legacy
-   redirects from outside the account. Update Search Console for the new content.
+The original organization landing repository's About URL is corrected to
+`https://appautomaton.com/`. Individual project About fields and page metadata
+remain a separate migration task. Current project-path redirects resolve those
+About URLs to their current destinations when this directory builds.
 
-Cloudflare routing remains owned by Armada at
-`edge/cloudflare/appautomaton.com/README.md`; credentials belong in its wrappers.
-This repository must not contain provider credentials or private account reports.
+The whole-site Google Change of Address still needs reconciliation now that
+this hostname serves different content. Its account state and Cloudflare
+routing belong in Armada's `edge/cloudflare/appautomaton.com/README.md`.
+Provider credentials and private account observations do not belong here.

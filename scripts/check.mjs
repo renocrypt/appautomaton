@@ -24,3 +24,15 @@ console.log(`Verified ${catalog.projects.length} crawlable project entries, loca
 if (config.publication === 'production') {
  for (const p of catalog.projects) assert(p.website !== config.canonicalOrigin + '/', `Project ${p.name} points back to this directory. Correct its GitHub About URL before cutover.`)
 }
+
+const projectMarkup = [...html.matchAll(/<article class="project"[\s\S]*?<\/article>/g)].map(m => m[0]).join('')
+for (const anchor of projectMarkup.matchAll(/<a\b([^>]*)>/g)) {
+ const rel = anchor[1].match(/\brel\s*=\s*(["'])(.*?)\1/i)?.[2] || ''
+ assert(!/\b(nofollow|sponsored|ugc)\b/i.test(rel), 'Project backlinks must allow normal following')
+}
+if (config.publication === 'production') {
+ const sitemap = await readFile('_site/sitemap.xml', 'utf8')
+ const robots = await readFile('_site/robots.txt', 'utf8')
+ assert(sitemap.includes(`<loc>${config.canonicalOrigin}/</loc>`), 'Production sitemap must include the homepage')
+ assert(robots.includes(`Sitemap: ${config.canonicalOrigin}/sitemap.xml`), 'robots.txt must declare the production sitemap')
+}
