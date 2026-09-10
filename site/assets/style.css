@@ -83,7 +83,7 @@ main { overflow:clip }
 .hero-object { position:absolute; width:46%; right:-1.5%; top:-10%; transform:translate3d(0,0,0); pointer-events:none }
 .specimen { position:relative; width:100%; aspect-ratio:1 }
 .specimen>div { position:absolute; inset:0; transform-origin:center }
-.specimen-blade-position,.specimen-blade { position:absolute; inset:0; transform-origin:center }
+.specimen-petals,.specimen-blade-position,.specimen-blade { position:absolute; inset:0; transform-origin:center }
 .specimen-blade-position { transform:rotate(var(--blade-angle)); transition:transform 1.15s var(--ease) var(--blade-stagger) }
 [data-arrangement="1"] .specimen-blade-position { transform:rotate(calc(var(--blade-angle) + var(--blade-side)*12deg)) translateY(-24px) scaleX(.56) }
 [data-arrangement="2"] .specimen-blade-position { transform:rotate(calc(var(--blade-angle) + var(--blade-side)*26deg)) translateY(36px) scale(.76) }
@@ -208,7 +208,8 @@ footer { padding:45px var(--gutter) 25px }
 
 /* Only transform and opacity move. No perpetual repaint of SVG geometry,
    filters, gradients, shadows, or layout. Offscreen scenes have no animation. */
-[data-motion=on] .hero[data-visible=true] .specimen-petals { animation:unfold 1.8s var(--ease) both,turn 100s 1.8s linear infinite }
+[data-motion=on] .hero[data-visible=true] .specimen-opening { animation:unfold 1.8s var(--ease) both }
+[data-motion=on] .hero[data-visible=true] .specimen-petals { animation:turn 100s 1.8s linear infinite }
 [data-motion=on] .hero[data-visible=true] .specimen-blade { animation:breathe 11s ease-in-out infinite alternate; animation-delay:var(--blade-delay) }
 [data-motion=on] .hero[data-visible=true] .specimen-orbit { animation:turn 150s linear infinite reverse }
 [data-motion=on] .hero[data-visible=true] .specimen-heart { animation:turn 75s linear infinite reverse }

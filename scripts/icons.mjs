@@ -20,14 +20,14 @@ export function bloom() {
  const seeds = Array.from({length:12}, (_,i) => `<ellipse cx="360" cy="336" rx="9" ry="30" transform="rotate(${i*30} 360 360)"/>`).join('')
  return `<div class="specimen" aria-hidden="true">
  <div class="specimen-orbit"><svg viewBox="0 0 720 720" fill="none" stroke="var(--petal-line)" stroke-width="1"><circle cx="360" cy="360" r="328" opacity=".3"/><circle cx="360" cy="360" r="308" stroke-dasharray="2 10" opacity=".55"/><g opacity=".7">${ticks}</g><path d="M32 360h34m588 0h34M360 32v34m0 588v34"/><circle cx="688" cy="360" r="5" fill="var(--accent)"/><circle cx="32" cy="360" r="5" fill="var(--seed)"/></svg></div>
- <div class="specimen-petals"><svg class="specimen-definitions" viewBox="0 0 720 720" aria-hidden="true"><defs>
+ <div class="specimen-opening"><div class="specimen-petals"><svg class="specimen-definitions" viewBox="0 0 720 720" aria-hidden="true"><defs>
  <linearGradient id="specimen-fold" x1="257" y1="106" x2="413" y2="371" gradientUnits="userSpaceOnUse"><stop stop-color="var(--petal-light)"/><stop offset=".48" stop-color="var(--petal)"/><stop offset="1" stop-color="var(--petal-shade)"/></linearGradient>
  <g id="specimen-petal" stroke="var(--petal-line)" stroke-width="1.1" stroke-linejoin="round">
  <path d="M360 360C302 322 236 225 258 144 276 80 332 66 376 81 456 111 452 263 360 360Z" fill="url(#specimen-fold)"/>
  <path d="M360 360C375 269 345 190 376 81 422 169 439 270 360 360Z" fill="var(--petal-shade)" fill-opacity=".45"/>
  <path d="M360 360C307 267 278 165 340 91M360 360C325 257 317 167 354 86M360 360C350 246 346 156 368 83M360 360C400 258 407 170 383 94" opacity=".45"/>
  <path d="M272 163C277 120 307 97 330 94" stroke="var(--petal-glint)" stroke-width="2"/>
- </g></defs></svg>${petals}</div>
+ </g></defs></svg>${petals}</div></div>
  <div class="specimen-heart"><svg viewBox="0 0 720 720" fill="none" stroke="var(--petal-line)"><circle cx="360" cy="360" r="68" fill="var(--paper)" stroke-width="1.2"/><circle cx="360" cy="360" r="60" stroke-dasharray="1 5" stroke-width="4"/><g stroke-width=".85" fill="var(--seed)" fill-opacity=".18">${seeds}</g><circle cx="360" cy="360" r="12" fill="var(--seed)" stroke-width="1.2"/><circle cx="360" cy="360" r="4" fill="var(--petal-line)" stroke="none"/></svg></div>
  </div>`
 }
