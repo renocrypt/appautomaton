@@ -24,7 +24,7 @@ as the main workshop.
 
 ## Refresh and publication
 
-[Refresh and publish field guide](../../actions/workflows/publish.yml) runs:
+[Refresh and publish field guide](https://github.com/renocrypt/appautomaton/actions/workflows/publish.yml) runs:
 
 - Every Monday at 08:23 UTC.
 - On a push to `main`.
@@ -63,6 +63,8 @@ sitemap, licensed local fonts, and original SVG illustrations. JavaScript only
 adds search, filtering, motion, and a persistent theme preference.
 
 ## Publication state
+
+Preview: https://renocrypt.github.io/appautomaton/
 
 `site.config.json` starts in **preview** mode. The preview carries `noindex`
 and publishes an empty sitemap. It does not claim that the intended production

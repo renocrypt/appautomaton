@@ -14,6 +14,9 @@ Before production:
 1. Confirm launch timing with the operator and reconcile the existing Search
    Console migration. It currently tells Google to prefer the new catalog host.
 2. Inventory the old URL paths and retain their exact project destinations.
+   Update the original repositories’ GitHub About URLs to their new destinations
+   before repurposing the old homepage. The build rejects a project link back
+   to this directory’s root in production.
 3. Set the GitHub Pages custom domain on this repository, verify DNS ownership,
    and obtain HTTPS before changing the public routing.
 4. Set `publication` to `production`, build, and verify the intended canonical,

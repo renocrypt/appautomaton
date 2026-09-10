@@ -20,3 +20,7 @@ assert(html.includes('href="https://appautomaton.com/"'),'Missing main workshop 
 const config=JSON.parse(await readFile('site.config.json','utf8'))
 assert(html.includes(`content="${config.publication==='production'?'index, follow, max-image-preview:large':'noindex, follow'}"`),'Publication indexing policy is inconsistent')
 console.log(`Verified ${catalog.projects.length} crawlable project entries, local assets, publication metadata, and structured data.`)
+
+if (config.publication === 'production') {
+ for (const p of catalog.projects) assert(p.website !== config.canonicalOrigin + '/', `Project ${p.name} points back to this directory. Correct its GitHub About URL before cutover.`)
+}
