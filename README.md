@@ -60,7 +60,8 @@ and is never used by the publication workflow.
 The output in `_site/` contains complete HTML links and descriptions, JSON-LD,
 a machine-readable `catalog.json`, a plain `llms.txt` edition, robots.txt, a
 sitemap, licensed local fonts, and original SVG illustrations. JavaScript only
-adds search, filtering, motion, and a persistent theme preference.
+adds search, filtering, interactive artwork, and persistent theme and motion
+preferences. The build enforces small compressed CSS and JavaScript budgets.
 
 ## Publication state
 
