@@ -13,7 +13,21 @@ export const marks = {
 export function icon(name, cls = '') {
  return `<svg class="mark ${cls}" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${marks[name] || marks.flower}</svg>`
 }
+// Independent orbit, petal, and heart layers. Geometry never changes per frame.
 export function bloom() {
- const petals = Array.from({length:8},(_,i)=>`<g transform="rotate(${i*45} 240 240)"><path d="M240 242C208 217 158 161 172 104 184 56 220 37 240 20c20 17 56 36 68 84 14 57-36 113-68 138Z" fill="var(--petal)" stroke="var(--petal-line)" stroke-width="1.4"/><path d="M240 228V49M240 160l-24-48m24 15 25-41" fill="none" stroke="var(--petal-line)" stroke-width="1" opacity=".55"/></g>`).join('')
- return `<svg class="bloom" viewBox="0 0 480 480" aria-hidden="true"><g class="bloom-petals">${petals}</g><circle cx="240" cy="240" r="48" fill="var(--seed)" stroke="var(--petal-line)" stroke-width="1.5"/><circle cx="240" cy="240" r="32" fill="none" stroke="var(--petal-line)" stroke-dasharray="1 5" stroke-width="10"/><path d="M228 252l24-24m-24 0h24v24" fill="none" stroke="var(--petal-line)" stroke-width="3"/></svg>`
+ const ticks = Array.from({length:48}, (_,i) => `<path d="M360 32v${i%4===0?14:5}" transform="rotate(${i*7.5} 360 360)"/>`).join('')
+ const petals = Array.from({length:8}, (_,i) => `<div class="specimen-blade-position" style="--blade-angle:${i*45}deg;--blade-delay:-${i*1.2}s;--blade-side:${i%2?1:-1};--blade-stagger:${i*32}ms"><div class="specimen-blade"><svg viewBox="0 0 720 720" fill="none"><use href="#specimen-petal"/></svg></div></div>`).join('')
+ const seeds = Array.from({length:12}, (_,i) => `<ellipse cx="360" cy="336" rx="9" ry="30" transform="rotate(${i*30} 360 360)"/>`).join('')
+ return `<div class="specimen" aria-hidden="true">
+ <div class="specimen-orbit"><svg viewBox="0 0 720 720" fill="none" stroke="var(--petal-line)" stroke-width="1"><circle cx="360" cy="360" r="328" opacity=".3"/><circle cx="360" cy="360" r="308" stroke-dasharray="2 10" opacity=".55"/><g opacity=".7">${ticks}</g><path d="M32 360h34m588 0h34M360 32v34m0 588v34"/><circle cx="688" cy="360" r="5" fill="var(--accent)"/><circle cx="32" cy="360" r="5" fill="var(--seed)"/></svg></div>
+ <div class="specimen-petals"><svg class="specimen-definitions" viewBox="0 0 720 720" aria-hidden="true"><defs>
+ <linearGradient id="specimen-fold" x1="257" y1="106" x2="413" y2="371" gradientUnits="userSpaceOnUse"><stop stop-color="var(--petal-light)"/><stop offset=".48" stop-color="var(--petal)"/><stop offset="1" stop-color="var(--petal-shade)"/></linearGradient>
+ <g id="specimen-petal" stroke="var(--petal-line)" stroke-width="1.1" stroke-linejoin="round">
+ <path d="M360 360C302 322 236 225 258 144 276 80 332 66 376 81 456 111 452 263 360 360Z" fill="url(#specimen-fold)"/>
+ <path d="M360 360C375 269 345 190 376 81 422 169 439 270 360 360Z" fill="var(--petal-shade)" fill-opacity=".45"/>
+ <path d="M360 360C307 267 278 165 340 91M360 360C325 257 317 167 354 86M360 360C350 246 346 156 368 83M360 360C400 258 407 170 383 94" opacity=".45"/>
+ <path d="M272 163C277 120 307 97 330 94" stroke="var(--petal-glint)" stroke-width="2"/>
+ </g></defs></svg>${petals}</div>
+ <div class="specimen-heart"><svg viewBox="0 0 720 720" fill="none" stroke="var(--petal-line)"><circle cx="360" cy="360" r="68" fill="var(--paper)" stroke-width="1.2"/><circle cx="360" cy="360" r="60" stroke-dasharray="1 5" stroke-width="4"/><g stroke-width=".85" fill="var(--seed)" fill-opacity=".18">${seeds}</g><circle cx="360" cy="360" r="12" fill="var(--seed)" stroke-width="1.2"/><circle cx="360" cy="360" r="4" fill="var(--petal-line)" stroke="none"/></svg></div>
+ </div>`
 }

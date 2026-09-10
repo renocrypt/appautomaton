@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { gzipSync } from 'node:zlib'
 import { readFile, access } from 'node:fs/promises'
 import { escapeHTML } from './catalog.mjs'
 const html=await readFile('_site/index.html','utf8')
@@ -35,4 +36,17 @@ if (config.publication === 'production') {
  const robots = await readFile('_site/robots.txt', 'utf8')
  assert(sitemap.includes(`<loc>${config.canonicalOrigin}/</loc>`), 'Production sitemap must include the homepage')
  assert(robots.includes(`Sitemap: ${config.canonicalOrigin}/sitemap.xml`), 'robots.txt must declare the production sitemap')
+}
+
+// Keep the progressive enhancement small as the automatically discovered
+// collection grows. Artwork is built HTML, never a browser rendering dependency.
+for (const [file, limit] of [['app.js', 6*1024], ['style.css', 9*1024]]) {
+ const bytes = gzipSync(await readFile('site/assets/' + file)).length
+ assert(bytes <= limit, `${file} exceeds its compressed delivery budget: ${bytes}/${limit} bytes`)
+ console.log(`${file}: ${bytes} bytes gzip, budget ${limit}`)
+}
+const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1])
+assert.equal(new Set(ids).size, ids.length, 'Duplicate DOM or SVG IDs')
+for (const article of html.matchAll(/<article\b[^>]*>/g)) {
+ assert(!/\bhidden(?:\s|=|>)/.test(article[0]), 'Initial HTML must expose every project without JavaScript')
 }
