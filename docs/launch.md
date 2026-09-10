@@ -15,11 +15,11 @@ self-canonical metadata and a sitemap of those pages. Outgoing project links
 are rendered as ordinary HTML links without restrictive rel attributes.
 
 The original organization landing repository's About URL is corrected to
-`https://appautomaton.com/`. Individual project About fields and page metadata
-remain a separate migration task. Current project-path redirects resolve those
-About URLs to their current destinations when this directory builds.
+`https://appautomaton.com/`. All 17 approved repository About URLs now point directly to `appautomaton.com`.
+Metadata within the individual project pages remains a separate migration task.
+Legacy redirects continue to protect existing external links.
 
-The whole-site Google Change of Address still needs reconciliation now that
-this hostname serves different content. Its account state and Cloudflare
-routing belong in Armada's `edge/cloudflare/appautomaton.com/README.md`.
+The obsolete whole-site Google Change of Address has been canceled, and Google
+accepted the new sitemap submission. Account state and Cloudflare routing
+belong in Armada's `edge/cloudflare/appautomaton.com/README.md`.
 Provider credentials and private account observations do not belong here.
